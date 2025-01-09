@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        /* Grid Layout for Products */
+        .product-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Product Card Styling */
+        .product-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card .details {
+            padding: 15px;
+        }
+
+        .product-card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .product-card p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Directory</h1>
+    <div class="container">
+        <div class="product-grid" id="productGrid">
+            <!-- Dynamic product cards will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Simulated fetch function for product data
+        const fetchProductData = async () => {
+            return [
+                { id: 1, name: "Wireless Headphones", description: "High-quality headphone", image: "1.jpg" },
+                { id: 2, name: "Smartphone", description: "Top-notch Phone", image: "2.jpg" },
+                { id: 3, name: "Digital Camera", description: "Reliable Camera", image: "3.jpg" },
+                { id: 4, name: "IPhone", description: "Durable Iphone", image: "4.jpg" },
+                { id: 5, name: "Joyistick", description: "Smoothen for Gaming", image: "5.jpg"},
+                { id: 6, name: "Bluetooth", description: "High-quality Bluetooh", image: "6.jpg"},
+                { id: 7, name: "PC", description: "Highily Expensive Pc Set-up", image: "7.jpg"},
+                { id: 8, name: "MacBook Air-2 Pro", description: "512Gb latest Laptop",image: "8.jpg"},
+            ];
+        };
+
+        // Function to render product cards dynamically
+        const renderProducts = async () => {
+            const productGrid = document.getElementById("productGrid");
+            const products = await fetchProductData();
+
+            productGrid.innerHTML = products
+                .map(
+                    (product) => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="details">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                    </div>
+                </div>
+            `
+                )
+                .join("");
+        };
+
+        // Call the render function on page load
+        renderProducts();
+    </script>
+</body>
+</html>
